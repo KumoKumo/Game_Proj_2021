@@ -8,22 +8,22 @@ public class InputController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            moveDirection += new Vector3(0, 1, 0);
+            moveDirection += Vector3.up;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            moveDirection += new Vector3(0, -1, 0);
+            moveDirection += Vector3.down;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            moveDirection += new Vector3(-1, 0, 0);
+            moveDirection += Vector3.left;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            moveDirection += new Vector3(1, 0, 0);
+            moveDirection += Vector3.right;
         }
 
         return moveDirection;
