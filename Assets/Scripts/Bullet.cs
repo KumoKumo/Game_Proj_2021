@@ -52,18 +52,9 @@ public class Bullet : MonoBehaviour
     private void ReturnToBulletPoolWhenTimesUp()
     {
         if (timer > aliveTime)
-        {
-            timer = 0;
             OnTimeOut?.Invoke(this);
-        }
         else
-        {
             timer += Time.deltaTime;
-        }
     }
 
-    private void OnDestroy()
-    {
-        OnTimeOut = null;
-    }
 }
