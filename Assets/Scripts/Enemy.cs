@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Action<Enemy> OnEnemyHitSomething;
+    public Vector3 Position { set { transform.position = value; } }
+
     //If IsTrigger is checked then OnCollisionEnter2D won't be called.
     //OnTriggerEnter2D will be called instead.
     private void OnCollisionEnter2D(Collision2D collision)
@@ -10,7 +14,18 @@ public class Enemy : MonoBehaviour
         if(collider.tag == "Bullet")
         {
             Destroy(collider.gameObject);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
+    }
+
+    private void OnDisable()
+    {
+        OnEnemyHitSomething?.Invoke(this);
+        OnEnemyHitSomething = null;
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
     }
 }
