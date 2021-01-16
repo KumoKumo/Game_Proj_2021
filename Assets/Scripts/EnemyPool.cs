@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class EnemyPool : MonoBehaviour
 {
-    [SerializeField] private int maxNumberOfEnemy;
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private float spawnRate;
+    [SerializeField] private float timeBetweenSpawns;
+    [SerializeField] private EnemyFactory enemyFactory;
 
     private Queue<Enemy> _enemyPool;
 
@@ -18,33 +17,28 @@ public class EnemyPool : MonoBehaviour
     private void Awake()
     {
         _enemyPool = new Queue<Enemy>();
-        _timer = 0;
+        _timeSinceLastSpawn = 0;
     }
 
     private void Update()
     {
-        if (!IsTooManyEnemies() && IsTimeToSpawn())
+        if (IsTimeToSpawn())
             SpawnEnemy();
     }
 
     private void SpawnEnemy()
     {
+        _timeSinceLastSpawn = 0f;
         if (_enemyPool.Count == 0)
-            SpawnNewEnemy();
+            AddEnemyToPool();
         else SpawnEnemyFromPool();
     }
 
-    private void SpawnNewEnemy()
+    private void AddEnemyToPool()
     {
-        var newEnemy = Instantiate(
-            enemyPrefab,
-            transform.position,
-            transform.rotation).GetComponent<Enemy>();
-        newEnemy.OnEnemyHitSomething += ReturnEnemyToPool;
-        newEnemy.transform.SetParent(transform);
+        var newEnemy = enemyFactory.Create(transform);
+        if (newEnemy == null) return;
         _enemyPool.Enqueue(newEnemy);
-
-        SpawnEnemyFromPool();
     }
 
     private void SpawnEnemyFromPool()
@@ -62,24 +56,18 @@ public class EnemyPool : MonoBehaviour
 
     private Vector3 GetRandomPositionInBound()
     {
-        return Vector3.zero;
+        return new Vector3(
+            Random.Range(-8.5f,8.5f),
+            Random.Range(-4.5f, 4.5f));
     }
 
-    private bool IsTooManyEnemies()
-    {
-        return _enemyPool.Count == maxNumberOfEnemy;
-    }
-
-    private float _timer;
+    private float _timeSinceLastSpawn;
     private bool IsTimeToSpawn()
     {
-        if (_timer >= spawnRate)
-        {
-            _timer = 0;
+        if (_timeSinceLastSpawn >= timeBetweenSpawns)
             return true;
-        }
 
-        _timer += Time.deltaTime;
+        _timeSinceLastSpawn += Time.deltaTime;
         return false;
     }
 }
