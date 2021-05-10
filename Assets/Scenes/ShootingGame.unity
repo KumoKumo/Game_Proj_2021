@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 669223158}
-  bulletObj: {fileID: 7592528677736734398, guid: 64dccbf43f168f74bacebd059695735f, type: 3}
+  bulletObj: {fileID: 7592528677736734398, guid: e7f2e439336776b41aa92f07b21956d7, type: 3}
   firingRate: 0.15
 --- !u!1 &669223157
 GameObject:
@@ -452,4 +452,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumberOfEnemy: 5
-  enemyPrefab: {fileID: 3730430325280862926, guid: 3ee39b8ffdf4fde4e85693888204eff6, type: 3}
+  enemyPrefab: {fileID: 3730430325280862926, guid: ad2d972d657115e4d87727d37d43fc7f, type: 3}
