@@ -10,7 +10,6 @@ public class EnemyPool : MonoBehaviour
 
     private void ReturnEnemyToPool(Enemy enemy)
     {
-        enemy.OnEnemyHitByBullet -= ReturnEnemyToPool;
         if (_enemyPool != null)
             _enemyPool.Enqueue(enemy);
     }
@@ -39,13 +38,13 @@ public class EnemyPool : MonoBehaviour
     {
         var newEnemy = enemyFactory.Create(transform);
         if (newEnemy == null) return;
+        newEnemy.OnEnemyHitByBullet += ReturnEnemyToPool;
         _enemyPool.Enqueue(newEnemy);
     }
 
     private void SpawnEnemyFromPool()
     {
         var enemy = _enemyPool.Dequeue();
-        enemy.OnEnemyHitByBullet += ReturnEnemyToPool;
         ShowEnemyAtRandomPosition(enemy);
     }
 

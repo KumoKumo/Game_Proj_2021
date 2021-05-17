@@ -11,11 +11,10 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var collider = collision.collider;
-        if(collider.tag == "Bullet")
-        {
+        if (collider.tag == "Bullet")
             Destroy(collider.gameObject);
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
+
     }
 
     private void OnDisable()

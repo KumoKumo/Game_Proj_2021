@@ -4,6 +4,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private int maxNumberOfEnemy;
+    [SerializeField] private EnemyPool enemyPool;
+    [SerializeField] private Player player;
+
     private List<Enemy> _enemyList;
 
     public int Score { get; private set; }
@@ -20,15 +23,30 @@ public class GameManager : MonoBehaviour
     public void OnEnemyHitByBullet(Enemy enemy)
     {
         Score++;
-        Debug.Log(Score);
+        Debug.Log("<color=blue>Score: </color>" + Score);
     }
 
     private void Awake()
     {
         Score = 0;
-        PlayerHealth = 0;
+        PlayerHealth = 5;
         _enemyList = new List<Enemy>();
+        player.OnCollisionWithEnemy += OnPlayerCollideWithEnemy;
     }
 
+    private void OnPlayerCollideWithEnemy()
+    {
+        PlayerHealth--;
+        Debug.Log("<color=green>Health: </color>" + PlayerHealth);
+        if (PlayerHealth == 0)
+            StopTheGame();
+    }
 
+    private void StopTheGame()
+    {
+        player.StopPlaying();
+        enemyPool.enabled = false;
+        Debug.Log("<color=red>GAME OVER!!!</color>");
+
+    }
 }

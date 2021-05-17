@@ -68,17 +68,11 @@ public class BulletPool : MonoBehaviour
 
     private void SpawnBullet()
     {
-        var bullet = Instantiate(bulletObj);
+        var bullet = Instantiate(bulletObj).GetComponent<Bullet>();
         bullet.transform.SetParent(transform);
-        LoadBullet(bullet.GetComponent<Bullet>());
-        ShootABullet();
-    }
-
-    private void LoadBullet(Bullet bullet)
-    {
-        //TODO: How to unsubscribe this when BulletPool is Destroyed?
         bullet.OnTimeOut += OnBulletTimeOut;
         _bulletPool.Enqueue(bullet);
+        ShootABullet();
     }
 
     private void OnBulletTimeOut(Bullet bullet)
