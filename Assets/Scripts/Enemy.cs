@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Action<Enemy> OnEnemyHitByBullet;
+    public Transform Target;
+    public Action OnEnemyHitByBullet;
+    public Action<Enemy> OnHideEnemy;
     public Vector3 Position { set { transform.position = value; } }
 
     //If IsTrigger is checked then OnCollisionEnter2D won't be called.
@@ -12,19 +14,27 @@ public class Enemy : MonoBehaviour
     {
         var collider = collision.collider;
         if (collider.tag == "Bullet")
+        {
             Destroy(collider.gameObject);
-        gameObject.SetActive(false);
+            OnEnemyHitByBullet?.Invoke();
+            gameObject.SetActive(false);
+        }
+    }
 
+    private void Update()
+    {
+        MoveToTarget();
+    }
+
+    private void MoveToTarget()
+    {
+        var moveDirection = Target.position - transform.position;
+        transform.Translate(moveDirection.normalized * Time.deltaTime);
     }
 
     private void OnDisable()
     {
-        OnEnemyHitByBullet?.Invoke(this);
-    }
-
-    public void Hide()
-    {
-        gameObject.SetActive(false);
+        OnHideEnemy?.Invoke(this);
     }
 
     public void Show()

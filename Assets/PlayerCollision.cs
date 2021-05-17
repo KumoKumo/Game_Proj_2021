@@ -1,16 +1,21 @@
-using System;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public Action OnPlayerCollideWithEnemy;
+    private Player _player;
+
+    private void Start()
+    {
+        _player = GetComponentInParent<Player>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var collider = collision.collider;
         if (collider.tag == "Enemy")
         {
-            OnPlayerCollideWithEnemy?.Invoke();
+            collider.gameObject.SetActive(false);
+            _player?.OnCollisionWithEnemy.Invoke();
         }
     }
 }

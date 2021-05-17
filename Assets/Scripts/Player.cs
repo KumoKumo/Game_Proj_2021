@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerCollision playerCollision;
     [SerializeField] [Range(1, 10)] private float speed;
 
+    public Action OnCollisionWithEnemy;
 
     private bool _isPlaying;
     public void StartPlaying()
@@ -21,11 +22,8 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public Action OnCollisionWithEnemy;
     private void Awake()
     {
-        playerCollision.OnPlayerCollideWithEnemy += 
-            ()=> OnCollisionWithEnemy.Invoke();
         StartPlaying();
     }
 

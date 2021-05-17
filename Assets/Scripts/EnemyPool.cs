@@ -38,7 +38,7 @@ public class EnemyPool : MonoBehaviour
     {
         var newEnemy = enemyFactory.Create(transform);
         if (newEnemy == null) return;
-        newEnemy.OnEnemyHitByBullet += ReturnEnemyToPool;
+        newEnemy.OnHideEnemy += ReturnEnemyToPool;
         _enemyPool.Enqueue(newEnemy);
     }
 

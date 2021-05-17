@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         _enemyList?.Add(enemy);
     }
 
-    public void OnEnemyHitByBullet(Enemy enemy)
+    public void OnEnemyHitByBullet()
     {
         Score++;
         Debug.Log("<color=blue>Score: </color>" + Score);
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerHealth--;
         Debug.Log("<color=green>Health: </color>" + PlayerHealth);
-        if (PlayerHealth == 0)
+        if (PlayerHealth <= 0)
             StopTheGame();
     }
 

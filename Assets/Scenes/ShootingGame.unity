@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 345156341}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345156338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 628127955}
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e271d178a8f77746bd9a200c0997cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenSpawns: 0.7
+  timeBetweenSpawns: 0.5
   enemyFactory: {fileID: 714894477}
 --- !u!114 &714894477
 MonoBehaviour:
@@ -547,6 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3730430325280862926, guid: ad2d972d657115e4d87727d37d43fc7f, type: 3}
   gameManager: {fileID: 1698951113}
+  target: {fileID: 345156340}
 --- !u!1 &1698951111
 GameObject:
   m_ObjectHideFlags: 0
