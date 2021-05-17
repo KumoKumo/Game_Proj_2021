@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Action<Enemy> OnEnemyHitSomething;
+    public Action<Enemy> OnEnemyHitByBullet;
     public Vector3 Position { set { transform.position = value; } }
 
     //If IsTrigger is checked then OnCollisionEnter2D won't be called.
@@ -20,8 +20,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
-        OnEnemyHitSomething?.Invoke(this);
-        OnEnemyHitSomething = null;
+        OnEnemyHitByBullet?.Invoke(this);
     }
 
     public void Hide()
